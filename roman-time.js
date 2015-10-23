@@ -1,20 +1,21 @@
-var hours = process.argv[2];
-var minutes = process.argv[3];
+var hours = Number(process.argv[2]);
+var minutes = Number(process.argv[3]);
 
 var valid = check(hours, minutes);
 if (valid) {
-    printTime(hours, minutes);
+    printTime(hours, minutes)
 } else {
-    console.log('Время указано не верно');
+    console.log('Время указано не верно')
 }
 
 function check(hours, minutes) {
-    if (hours <= 23 && hours >= 0) {
-        if (minutes <= 59 && minutes >= 0) {
-            return true;
-        }
+    if (hours > 23 || hours < 0) {
+        return false;
     }
-    return false;
+    if (minutes > 59 || minutes < 0) {
+        return false;
+    }
+    return true;
 }
 
 function printTime(hours, minutes) {
@@ -33,9 +34,9 @@ function printInASCII(time) {
         [],
         [],
         []
-    ];
+    ]
     for (var i = 0; i < time.length; i++) {
-        result = addSymbol(result, time[i]);
+        result = addSymbol(result, time[i])
     };
     for (var i = 0; i < result.length; i++) {
         var str = '';
@@ -54,7 +55,7 @@ function addSymbol(array, symbol) {
         ['   '],
         [' _ '],
         ['(_)']
-    ];
+    ]
     var symbolI = [
         [' _____ '],
         ['|_   _|'],
@@ -84,7 +85,7 @@ function addSymbol(array, symbol) {
         [' | |     '],
         [' | |     '],
         [' | |     '],
-        [' | |____ '],
+        [' | |     '],
         [' |______|']
     ];
     var symbol0 = [
@@ -94,14 +95,14 @@ function addSymbol(array, symbol) {
         ['         '],
         ['  ______ '],
         [' |______|']
-    ];
+    ]
     var allSymbols = {
         ':': colonSymbol,
-        I: symbolI,
-        V: symbolV,
-        X: symbolX,
-        L: symbolL,
-        _: symbol0
+        'I': symbolI,
+        'V': symbolV,
+        'X': symbolX,
+        'L': symbolL,
+        '_': symbol0
     };
 
     for (var i = 0; i < array.length; i++) {
@@ -127,7 +128,7 @@ function convertToRoman(number) {
     if (number / 10 >= 1) {
         var n = (number - number % 10) / 10;
         for (var i = 0; i < n; i++) {
-            roman += 'X';
+            roman += 'X'
         };
         number -= 10 * n;
     }
